@@ -4,6 +4,10 @@
     <TargetFramework>netcoreapp2.1</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\jaytwo.AsyncHelper\jaytwo.AsyncHelper.csproj" />
+  </ItemGroup>
+  
   <!-- default test packages -->
   <ItemGroup>
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.6.1" />
