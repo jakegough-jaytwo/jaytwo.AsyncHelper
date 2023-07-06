@@ -1,10 +1,12 @@
 library 'JenkinsBuilderLibrary'
 
-helper.gitHubUsername = 'jakegough'
+helper.gitHubUsername = 'jakegough-jaytwo'
 helper.gitHubRepository = 'jaytwo.AsyncHelper'
 helper.gitHubTokenCredentialsId = 'github-personal-access-token-jakegough'
 helper.nuGetCredentialsId = 'nuget-org-jaytwo'
 helper.xunitTestResultsPattern = 'out/testResults/**/*.trx'
+helper.coberturaCoverageReport = 'out/coverage/Cobertura.xml';
+helper.htmlCoverageReportDir = 'out/coverage/html';
 
 helper.run('linux && make && docker', {
     def timestamp = helper.getTimestamp()
