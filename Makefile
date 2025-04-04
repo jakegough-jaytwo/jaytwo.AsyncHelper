@@ -4,7 +4,7 @@ DOCKER_TAG?=jaytwo_asynchelper
 default: clean build
 
 deps:
-	dotnet tool install -g dotnet-reportgenerator-globaltool
+	dotnet tool install -g dotnet-reportgenerator-globaltool --version 5.1.26
 
 clean: 
 	find . -name bin | xargs --no-run-if-empty rm -vrf
