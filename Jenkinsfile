@@ -2,7 +2,7 @@ library 'JenkinsBuilderLibrary'
 
 helper.gitHubUsername = 'jakegough-jaytwo'
 helper.gitHubRepository = 'jaytwo.AsyncHelper'
-helper.gitHubTokenCredentialsId = 'github-personal-access-token-jakegough'
+helper.gitHubTokenCredentialsId = 'github-jakegough-jaytwo-token'
 helper.nuGetCredentialsId = 'nuget-org-jaytwo'
 helper.xunitTestResultsPattern = 'out/testResults/**/*.trx'
 helper.coberturaCoverageReport = 'out/coverage/Cobertura.xml';
