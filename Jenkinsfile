@@ -18,7 +18,7 @@ helper.run('linux && make && docker', {
             stage ('Build') {
                 sh "make docker-builder"
             }
-            docker.image(dockerLocalTag).inside() {
+            docker.image(dockerLocalTag + "__builder").inside() {
                 stage ('Unit Test') {
                     sh "make unit-test"
                 }
