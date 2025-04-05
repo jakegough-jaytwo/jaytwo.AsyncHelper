@@ -1,10 +1,12 @@
 TIMESTAMP?=$(shell date +'%Y%m%d%H%M%S')
 DOCKER_TAG?=jaytwo_asynchelper
+NUGET_PACKAGE?=jaytwo.AsyncHelper
 
 default: clean build
 
 deps:
 	dotnet tool install -g dotnet-reportgenerator-globaltool
+	dotnet tool install -g jaytwo.NuGetCheck
 
 clean: 
 	find . -name bin | xargs --no-run-if-empty rm -vrf
@@ -42,6 +44,10 @@ pack:
 
 pack-beta: PACK_ARG=--version-suffix beta-${TIMESTAMP}
 pack-beta: pack
+
+PACKED_NUPKG_FILE?=$(shell ls -1 'out/packed/*.nupkg')
+nuget-check:
+	nugetcheck ${NUGET_PACKAGE} -gte ${PACKED_NUPKG_FILE} --same-major --opposite-day
 
 publish:
 	rm -rf out/published

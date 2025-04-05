@@ -30,6 +30,7 @@ helper.run('linux && make && docker', {
             }
             if(env.BRANCH_NAME == 'master' || env.BRANCH_NAME == 'develop'){
                 stage ('Publish NuGet') {
+                    sh "make nuget-check"
                     helper.pushNugetPackage('out/packed')
                 }
             }
