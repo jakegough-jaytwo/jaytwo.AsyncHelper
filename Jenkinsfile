@@ -18,20 +18,22 @@ helper.run('linux && make && docker', {
             stage ('Build') {
                 sh "make docker-builder"
             }
-            stage ('Unit Test') {
-                sh "make docker-unit-test-only"
-            }
-            stage ('Pack') {
-                if(env.BRANCH_NAME == 'master'){
-                    sh "make docker-pack-only"
-                } else {
-                    sh "make docker-pack-beta-only"
+            docker.image(dockerLocalTag).inside() {
+                stage ('Unit Test') {
+                    sh "make unit-test"
                 }
-            }
-            if(env.BRANCH_NAME == 'master' || env.BRANCH_NAME == 'develop'){
-                stage ('Publish NuGet') {
-                    sh "make nuget-check"
-                    helper.pushNugetPackage('out/packed')
+                stage ('Pack') {
+                    if(env.BRANCH_NAME == 'master'){
+                        sh "make pack"
+                    } else {
+                        sh "make pack-beta"
+                    }
+                }
+                if(env.BRANCH_NAME == 'master' || env.BRANCH_NAME == 'develop'){
+                    stage ('Publish NuGet') {
+                        sh "make nuget-check"
+                        // helper.pushNugetPackage('out/packed')
+                    }
                 }
             }
         }
