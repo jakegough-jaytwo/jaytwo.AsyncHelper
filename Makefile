@@ -1,6 +1,8 @@
 TIMESTAMP?=$(shell date +'%Y%m%d%H%M%S')
 DOCKER_TAG?=jaytwo_asynchelper
 NUGET_PACKAGE?=jaytwo.AsyncHelper
+NUGET_SOURCE_URL?=https://api.nuget.org/v3/index.json
+NUGET_API_KEY?=__missing_api_key__
 
 default: clean build
 
@@ -49,10 +51,9 @@ PACKED_NUPKG_FILE?=$(shell ls -1 'out/packed/*.nupkg')
 nuget-check:
 	nugetcheck ${NUGET_PACKAGE} -gte ${PACKED_NUPKG_FILE} --same-major --opposite-day
 
-publish:
-	rm -rf out/published
-	cd ./src/jaytwo.AsyncHelper; \
-		dotnet publish -o ../../out/published
+nuget-push: nuget-check
+nuget-push:
+	dotnet nuget push "${PACKED_NUPKG_FILE}" --source "${NUGET_SOURCE_URL}" --api-key "${NUGET_API_KEY}"
 
 DOCKER_BASE_TAG?=${DOCKER_TAG}__base
 DOCKER_BUILDER_TAG?=${DOCKER_TAG}__builder
