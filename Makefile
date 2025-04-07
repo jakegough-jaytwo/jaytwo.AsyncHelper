@@ -8,7 +8,7 @@ default: clean build
 
 deps:
 	dotnet tool install -g dotnet-reportgenerator-globaltool
-	dotnet tool install -g jaytwo.NuGetCheck
+	dotnet tool install -g jaytwo.NuGetCheck.GlobalTool --prerelease
 
 clean: 
 	find . -name bin | xargs --no-run-if-empty rm -vrf
