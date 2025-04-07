@@ -14,7 +14,7 @@ helper.run('linux && make && docker', {
     def safeJobName = helper.getSafeJobName()
     def dockerLocalTag = "jenkins__${safeJobName}__${timestamp}"
     def dockerBuilderTag = dockerLocalTag + "__builder"
-    
+
     withEnv(["DOCKER_TAG=${dockerLocalTag}", "TIMESTAMP=${timestamp}"]) {
         try {
             stage ('Build') {
@@ -45,6 +45,7 @@ helper.run('linux && make && docker', {
         }
         finally {
             // inside the withEnv()
+            sh "make docker-copy-from-builder-output"
             sh "make docker-clean"
         }
     }
