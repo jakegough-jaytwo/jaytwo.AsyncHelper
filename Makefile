@@ -63,7 +63,7 @@ nuget-check:
 nuget-push: nuget-check
 nuget-push:
 	PACKED_NUPKG_FILE="$(shell ls -1 ${BUILD_PACKED_DIR}/*.nupkg)"; \
-	dotnet nuget push "$$PACKED_NUPKG_FILE" --source "$$PACKED_NUPKG_FILE" --api-key "$$NUGET_API_KEY"
+	dotnet nuget push "$$PACKED_NUPKG_FILE" --source "${NUGET_SOURCE_URL}" --api-key "$$NUGET_API_KEY"
 
 docker-builder:
 	# building the base image to force caching those layers in an otherwise discarded stage of the multistage dockerfile
