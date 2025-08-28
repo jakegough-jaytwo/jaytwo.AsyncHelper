@@ -1,4 +1,4 @@
 library 'JenkinsBuilderLibrary'
 
-helper.loadNuGetProjectDefaults('jaytwo.AsyncHelper')
-helper.runNuGetProject()
+nugetProject.build(
+    gitHubRepository: 'jaytwo.AsyncHelper')
